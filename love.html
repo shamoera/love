@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Love For You 🌸</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #ffe6f0, #ffffff);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .heart {
+      width: 150px;
+      height: 150px;
+      position: relative;
+      background: red;
+      transform: rotate(-45deg);
+      animation: beat 1s infinite;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -75px;
+      left: 0;
+    }
+    .heart::after {
+      left: 75px;
+      top: 0;
+    }
+
+    @keyframes beat {
+      0%, 100% {
+        transform: scale(1) rotate(-45deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(-45deg);
+      }
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 24px;
+      color: #c4004d;
+      text-align: center;
+      max-width: 80%;
+      min-height: 50px;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 30px;
+      font-size: 16px;
+      background: #ff4d88;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #d1005c;
+    }
+
+    .petal {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(45deg);
+      opacity: 0.8;
+      animation: fall 8s linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-20px) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="heart"></div>
+  <div id="message"></div>
+  <button onclick="typeWriter()">Show Message ❤️</button>
+
+  <script>
+    const message = "hi sayang, i love you more than you know. please always be happy.";
+    let i = 0;
+
+    function typeWriter() {
+      if (i < message.length) {
+        document.getElementById('message').innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+      }
+    }
+
+    function createPetal() {
+      const petal = document.createElement("div");
+      petal.classList.add("petal");
+      petal.style.left = Math.random() * window.innerWidth + "px";
+      petal.style.animationDuration = (5 + Math.random() * 3) + "s";
+      document.body.appendChild(petal);
+
+      setTimeout(() => {
+        petal.remove();
+      }, 8000);
+    }
+
+    setInterval(createPetal, 500);
+  </script>
+</body>
+</html>
